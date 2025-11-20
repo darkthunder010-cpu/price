@@ -1,4 +1,5 @@
 name: scheduled-scrape
+
 on:
   schedule:
     - cron: '0 */6 * * *'   # every 6 hours
@@ -7,6 +8,7 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -26,7 +28,7 @@ jobs:
           python - <<'PY'
 import db
 db.init_db()
-print("db init done")
+print("DB initialized")
 PY
 
       - name: Run batch scraper
