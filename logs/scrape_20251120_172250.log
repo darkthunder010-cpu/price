@@ -1,0 +1,10 @@
+﻿python.exe : Traceback (most recent call last):
+At C:\Users\Prashul\Desktop\price-history-starter\run_scrape.ps1:15 char:1
++ & $venv_python $scraper *>&1 | Tee-Object -FilePath $log
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\Prashul\Desktop\price-history-starter\scripts\scrape_all.py", line 3, in <module>
+    from scraper import scrape_price
+ModuleNotFoundError: No module named 'scraper'
