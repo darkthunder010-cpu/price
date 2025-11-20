@@ -1,5 +1,7 @@
 # scripts/scrape_all.py
 import time
+import sys
+sys.path.append(".")
 from scraper import scrape_price
 import db
 import sqlite3
