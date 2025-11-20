@@ -1,0 +1,37 @@
+name: nightly-scrape
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run scraping script
+        run: |
+          python - <<'PY'
+from scraper import scrape_price
+import db, json
+db.init_db()
+prods = db.list_products()
+for p in prods:
+    r = scrape_price(p['url'])
+    if r.get('price') is not None:
+        db.add_price(p['id'], r['price'], ts=r['timestamp'])
+print("Done")
+PY
+      - name: Upload DB artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prices-db
+          path: prices.db
