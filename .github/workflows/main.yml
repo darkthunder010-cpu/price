@@ -26,10 +26,10 @@ jobs:
       - name: Initialize DB
         run: |
           python - <<'PY'
-import db
-db.init_db()
-print("DB initialized")
-PY
+          import db
+          db.init_db()
+          print("DB initialized")
+          PY
 
       - name: Run batch scraper
         run: |
